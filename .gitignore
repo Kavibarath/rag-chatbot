@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.Python
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables / secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+
+# Data — never commit raw documents or large indexes
+data/raw/
+data/chroma/
+data/chunks/*.jsonl
+
+# Logs
+*.log
+logs/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Node (frontend, Week 5)
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Docker
+*.pid
