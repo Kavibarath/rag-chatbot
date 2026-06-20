@@ -27,3 +27,18 @@ MIN_PAGE_CHARS = 50
 
 # If a line appears on more than this fraction of pages, treat it as header/footer noise
 HEADER_FOOTER_THRESHOLD = 0.5
+
+# ---------------------------------------------------------------------------
+# Week 2 — Embeddings & Vector Store
+# ---------------------------------------------------------------------------
+
+# Sentence-transformers model. 384 dims, CPU-fast, free, max 256 input tokens.
+EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+
+# Chroma collection name
+COLLECTION_NAME = "mph_notes"
+
+# Number of chunks encoded per forward pass — bigger = faster, more RAM.
+# 64 is safe on a typical laptop. Bump to 128/256 if you have headroom.
+EMBED_BATCH_SIZE = 64
+
