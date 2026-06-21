@@ -1,0 +1,13 @@
+{"question": "What is a system call?", "expected": ["OSSA_Lecture1.pdf:16"]}
+{"question": "What are the advantages of multiprocessor systems?", "expected": ["OSSA_Lecture2.pdf:13"]}
+{"question": "What is the difference between asymmetric and symmetric multiprocessing?", "expected": ["OSSA_Lecture2.pdf:14", "OSSA_Lecture2.pdf:15"]}
+{"question": "What is a real-time operating system?", "expected": ["OSSA_Lecture2.pdf:7"]}
+{"question": "What is the difference between hard and soft real-time systems?", "expected": ["OSSA_Lecture2.pdf:7"]}
+{"question": "How does the operating system provide CPU protection?", "expected": ["OSSA_Lecture1.pdf:23"]}
+{"question": "What is a time-sharing or multitasking operating system?", "expected": ["OSSA_Lecture2.pdf:6"]}
+{"question": "What is an operating system?", "expected": ["OSSA_Lecture1.pdf:6"]}
+{"question": "What are the purposes of using an operating system?", "expected": ["OSSA_Lecture1.pdf:7"]}
+{"question": "What services does an operating system provide?", "expected": ["OSSA_Lecture1.pdf:13", "OSSA_Lecture1.pdf:14", "OSSA_Lecture1.pdf:15"]}
+{"question": "What is the booting process and bootstrap program?", "expected": ["OSSA_Lecture2.pdf:10"]}
+{"question": "What are the main components of a graphical user interface?", "expected": ["OSSA_Lecture1.pdf:11"]}
+{"question": "How does the OS handle I/O device protection?", "expected": ["OSSA_Lecture1.pdf:21"]}

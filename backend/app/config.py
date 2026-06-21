@@ -42,3 +42,16 @@ COLLECTION_NAME = "mph_notes"
 # 64 is safe on a typical laptop. Bump to 128/256 if you have headroom.
 EMBED_BATCH_SIZE = 64
 
+# ---------------------------------------------------------------------------
+# Week 3 — Reranking
+# ---------------------------------------------------------------------------
+
+# Cross-encoder reranker. Scores (query, chunk) pairs jointly — slow but precise.
+RERANK_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+
+# Stage 1: how many candidates to pull from Chroma before reranking.
+RETRIEVE_TOP_N = 20
+
+# Stage 2: how many to keep after reranking — this is what feeds the LLM.
+RERANK_TOP_K = 5
+
