@@ -55,3 +55,38 @@ RETRIEVE_TOP_N = 20
 # Stage 2: how many to keep after reranking — this is what feeds the LLM.
 RERANK_TOP_K = 5
 
+# ---------------------------------------------------------------------------
+# Week 4 — LLM (Gemini)
+# ---------------------------------------------------------------------------
+
+# Google Gemini model. 2.0 Flash: fast, free tier, 1M context window.
+# Swap to "gemini-2.5-pro" later if you want higher quality (free tier slower).
+GEMINI_MODEL = "gemini-2.0-flash"
+
+# Cap the answer length so we don't spend tokens on rambling responses.
+MAX_OUTPUT_TOKENS = 1024
+
+# The system prompt — the anti-hallucination guardrail lives here.
+SYSTEM_PROMPT = """You are a study assistant for the user's university IT coursework
+(operating systems, system administration, and related topics).
+Answer the user's question using ONLY the provided context from their lecture notes.
+
+Rules:
+1. If the answer isn't fully supported by the context, say exactly:
+   "I don't have that in the provided notes."
+   Then optionally suggest what the user might search for instead.
+2. Cite every factual claim with [source:page] using the exact source filename
+   and page number from the context. Multiple citations are fine: [a.pdf:3][b.pdf:7].
+3. Be concise. Answer in 2-5 sentences unless the question explicitly needs more.
+4. Do not invent facts, page numbers, or sources. Do not use outside knowledge.
+"""
+
+# The user-turn template — context + question, formatted for the model.
+USER_PROMPT_TEMPLATE = """Context (top retrieved chunks from the notes):
+{context}
+
+Question: {question}
+
+Answer (with [source:page] citations):"""
+
+
