@@ -11,3 +11,20 @@
 {"question": "What is the booting process and bootstrap program?", "expected": ["OSSA_Lecture2.pdf:10"]}
 {"question": "What are the main components of a graphical user interface?", "expected": ["OSSA_Lecture1.pdf:11"]}
 {"question": "How does the OS handle I/O device protection?", "expected": ["OSSA_Lecture1.pdf:21"]}
+{"question": "What is the difference between a program and a process?", "expected": ["OSSA_Lecture3.pdf:4"]}
+{"question": "What information is stored in a Process Control Block (PCB)?", "expected": ["OSSA_Lecture3.pdf:10"]}
+{"question": "What is a context switch? Why is it considered overhead?", "expected": ["OSSA_Lecture3.pdf:17"]}
+{"question": "State four benefits of multithreading", "expected": ["OSSA_Lecture4.pdf:9"]}
+{"question": "Differentiate between user threads and kernel threads.", "expected": ["OSSA_Lecture4.pdf:10"]}
+{"question": "What are thread pools? State two advantages of using thread pools.", "expected": ["OSSA_Lecture4.pdf:16"]}
+{"question": "Differentiate between preemptive and non-preemptive scheduling.", "expected": ["OSSA_Lecture5.pdf:5"]}
+{"question": "What is dispatch latency?", "expected": ["OSSA_Lecture5.pdf:7"]}
+{"question": "What is the Convoy Effect in FCFS scheduling?", "expected": ["OSSA_Lecture5.pdf:12"]}
+{"question": "What is a race condition?", "expected": ["IT2130 - Lecture 7.pdf:7"]}
+{"question": "What are the three requirements for a correct solution to the Critical Section Problem?", "expected": ["IT2130 - Lecture 7.pdf:11"]}
+{"question": "What is a semaphore? Name its two atomic operations.", "expected": ["IT2130 - Lecture 7.pdf:21"]}
+{"question": "What is a file system?", "expected": ["IT2130 - Lecture 8.pdf:3"]}
+{"question": "Differentiate between sequential access and direct access methods.", "expected": ["IT2130 - Lecture 8.pdf:10-12"]}
+{"question": "Compare contiguous allocation and linked allocation.", "expected": ["IT2130 - Lecture 8.pdf:21-27"]}
+
+
