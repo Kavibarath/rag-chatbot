@@ -56,12 +56,13 @@ RETRIEVE_TOP_N = 20
 RERANK_TOP_K = 5
 
 # ---------------------------------------------------------------------------
-# Week 4 — LLM (Gemini)
+# Week 4 — LLM (Groq — Llama 3.3 70B)
 # ---------------------------------------------------------------------------
 
-# Google Gemini model. 2.0 Flash: fast, free tier, 1M context window.
-# Swap to "gemini-2.5-pro" later if you want higher quality (free tier slower).
-GEMINI_MODEL = "gemini-2.0-flash"
+# Groq model. Llama 3.3 70B Versatile: free tier, ~500 tok/s, great for RAG.
+# Alternatives: "llama-3.1-8b-instant" (faster, less capable),
+#               "gemma2-9b-it" (Google's open model).
+LLM_MODEL = "llama-3.3-70b-versatile"
 
 # Cap the answer length so we don't spend tokens on rambling responses.
 MAX_OUTPUT_TOKENS = 1024
