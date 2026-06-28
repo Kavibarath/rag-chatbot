@@ -58,6 +58,34 @@ def extract_docx_pages(path: Path) -> list[tuple[int, str]]:
     return [(1, text)]
 
 
+def extract_pptx_pages(path: Path) -> list[tuple[int, str]]:
+    """Each slide is one 'page'. Walks all shapes on each slide and collects text."""
+    from pptx import Presentation  # lazy import
+    prs = Presentation(str(path))
+    pages = []
+    for i, slide in enumerate(prs.slides, start=1):
+        parts = []
+        for shape in slide.shapes:
+            # Most text lives in shape.text_frame; tables and other shapes need different handling
+            if shape.has_text_frame:
+                for para in shape.text_frame.paragraphs:
+                    line = "".join(run.text for run in para.runs).strip()
+                    if line:
+                        parts.append(line)
+            elif shape.has_table:
+                for row in shape.table.rows:
+                    cells = [cell.text.strip() for cell in row.cells if cell.text.strip()]
+                    if cells:
+                        parts.append(" | ".join(cells))
+        # Speaker notes — often contain the actual lecture content beyond bullet points
+        if slide.has_notes_slide:
+            notes = slide.notes_slide.notes_text_frame.text.strip()
+            if notes:
+                parts.append(notes)
+        pages.append((i, "\n".join(parts)))
+    return pages
+
+
 # ---------------------------------------------------------------------------
 # Cleaning
 # ---------------------------------------------------------------------------
@@ -154,7 +182,7 @@ def chunk_document(source_name: str, pages: list[tuple[int, str]]) -> Iterator[d
 # Driver
 # ---------------------------------------------------------------------------
 
-SUPPORTED_EXT = {".pdf", ".docx"}
+SUPPORTED_EXT = {".pdf", ".docx", ".pptx"}
 
 
 def iter_source_files(raw_dir: Path) -> Iterator[Path]:
@@ -176,8 +204,11 @@ def run(raw_dir: Path, out_path: Path) -> None:
         for src in iter_source_files(raw_dir):
             print(f"-> {src.name}")
             try:
-                if src.suffix.lower() == ".pdf":
+                ext = src.suffix.lower()
+                if ext == ".pdf":
                     pages = extract_pdf_pages(src)
+                elif ext == ".pptx":
+                    pages = extract_pptx_pages(src)
                 else:
                     pages = extract_docx_pages(src)
             except Exception as e:

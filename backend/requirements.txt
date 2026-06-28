@@ -1,6 +1,7 @@
-# PDF + DOCX parsing
+# PDF + DOCX + PPTX parsing
 pypdf==5.1.0
 python-docx==1.1.2
+python-pptx==1.0.2
 
 # Chunking — just the splitter package, not all of LangChain
 langchain-text-splitters==0.3.2
