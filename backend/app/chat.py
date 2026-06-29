@@ -65,7 +65,10 @@ def format_context(chunks: list[Chunk]) -> str:
 # --- The actual chat call -------------------------------------------------
 
 def answer(question: str, top_k: int = RERANK_TOP_K, rerank: bool = True) -> dict:
-    """Run the full RAG pipeline. Returns {'answer', 'sources'}."""
+    """Run the full RAG pipeline. Returns {'answer', 'sources'}.
+
+    Non-streaming variant — used by the CLI.
+    """
     chunks = retrieve(question, top_k=top_k, rerank=rerank)
     if not chunks:
         return {
@@ -92,6 +95,48 @@ def answer(question: str, top_k: int = RERANK_TOP_K, rerank: bool = True) -> dic
         "answer": text,
         "sources": [{"cite": c.cite(), "score": round(c.score, 3)} for c in chunks],
     }
+
+
+def stream_answer(question: str, top_k: int = RERANK_TOP_K, rerank: bool = True):
+    """Streaming variant — yields dicts ready to ship as Server-Sent Events.
+
+    Sequence:
+        {"type": "sources", "sources": [...]}           sent once, up-front
+        {"type": "token", "text": "..."}                one per streamed delta
+        {"type": "done"}                                terminal event
+        {"type": "error", "error": "..."}               on failure
+    """
+    try:
+        chunks = retrieve(question, top_k=top_k, rerank=rerank)
+        sources = [{"cite": c.cite(), "score": round(c.score, 3)} for c in chunks]
+        yield {"type": "sources", "sources": sources}
+
+        if not chunks:
+            yield {"type": "token", "text": "I don't have that in the provided notes."}
+            yield {"type": "done"}
+            return
+
+        context = format_context(chunks)
+        user_prompt = USER_PROMPT_TEMPLATE.format(context=context, question=question)
+
+        client = _get_client()
+        stream = client.chat.completions.create(
+            model=LLM_MODEL,
+            max_tokens=MAX_OUTPUT_TOKENS,
+            temperature=0.2,
+            stream=True,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+        )
+        for chunk in stream:
+            delta = chunk.choices[0].delta.content if chunk.choices else None
+            if delta:
+                yield {"type": "token", "text": delta}
+        yield {"type": "done"}
+    except Exception as e:
+        yield {"type": "error", "error": str(e)}
 
 
 # --- CLI ------------------------------------------------------------------
