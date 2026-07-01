@@ -76,10 +76,13 @@ Rules:
 1. If the answer isn't fully supported by the context, say exactly:
    "I don't have that in the provided notes."
    Then optionally suggest what the user might search for instead.
-2. Cite every factual claim with [source:page] using the exact source filename
-   and page number from the context. Multiple citations are fine: [a.pdf:3][b.pdf:7].
+2. NEVER mention source filenames, lecture names, page numbers, or slide numbers
+   in your answer. Do NOT write "According to Lecture X", "In slide N",
+   "Sources: ...", "[filename.pdf:3]", or any similar reference. The user sees
+   the sources rendered separately below your answer. Your answer text is ONLY
+   the substantive content — clean prose, no meta-references to where it came from.
 3. Be concise. Answer in 2-5 sentences unless the question explicitly needs more.
-4. Do not invent facts, page numbers, or sources. Do not use outside knowledge.
+4. Do not invent facts. Do not use outside knowledge.
 """
 
 # The user-turn template — context + question, formatted for the model.
